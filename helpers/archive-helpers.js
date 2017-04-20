@@ -61,11 +61,11 @@ exports.addUrlToList = function(url, callback) {
 		callback();
   });
 
-  fs.writeFile(exports.paths.archivedSites + '/' + url, '', function(err) { 
-    if (err) {
-    	console.log(err);
-    }
-  });
+  // fs.writeFile(exports.paths.archivedSites + '/' + url, '', function(err) { 
+  //   if (err) {
+  //   	console.log(err);
+  //   }
+  // });
 }
 
 exports.isUrlArchived = function(url, callback) {
@@ -79,6 +79,12 @@ exports.isUrlArchived = function(url, callback) {
 };
 
 
-exports.downloadUrls = function(urls) {
-
+exports.downloadUrls = function(urls) { //urls = array
+  fs.readdir(exports.paths.archivedSites, function(err, files) {
+  	if (JSON.stringify(files) === JSON.stringify(urls)) {
+  		return true;
+  	} else {
+  		return false;
+  	}
+  });
 };
