@@ -28,12 +28,12 @@ exports.initialize = function(pathsObj) {
 // var arrayOfUrls = [];
 // '/Users/student/Desktop/hrsf76-web-historian/archives/sites.txt'
 exports.readListOfUrls = function(callback) {
-	fs.readFile(exports.paths.list, 'utf8', function(err, data) {
-		if (err) {
-			console.log(err); 
-		}
-		callback(data.split('\n')); 
-	});
+  fs.readFile(exports.paths.list, 'utf8', function(err, data) {
+    if (err) {
+      console.log(err); 
+    }
+    callback(data.split('\n')); 
+  });
   //read through archived sites 
   //exports.paths.readFile?
   // console.log('ARCHIVED', archivedSites); 
@@ -41,50 +41,50 @@ exports.readListOfUrls = function(callback) {
 };
 
 exports.isUrlInList = function(url, callback) {
-	//readList
-	exports.readListOfUrls(function(data) {
-		if (data.includes(url)) {
-			callback(true);
-		} else {
-			callback(false);
-		}
-	});
-		//isUrlInList 
+  //readList
+  exports.readListOfUrls(function(data) {
+    if (data.includes(url)) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
+    //isUrlInList 
   // list: path.join(__dirname, '../archives/sites.txt')
 };
 
 exports.addUrlToList = function(url, callback) {
-	fs.writeFile(exports.paths.list, url, function(err) {
-		if (err) {
-			console.log(err); 
-		}
-		callback();
+  fs.writeFile(exports.paths.list, url, function(err) {
+    if (err) {
+      console.log(err); 
+    }
+    callback();
   });
 
   // fs.writeFile(exports.paths.archivedSites + '/' + url, '', function(err) { 
   //   if (err) {
-  //   	console.log(err);
+  //    console.log(err);
   //   }
   // });
 }
 
 exports.isUrlArchived = function(url, callback) {
-	fs.readdir(exports.paths.archivedSites, function(err, files) {
-			if (files.includes(url)) {	
-				callback(true);
-			} else {
-				callback(false);
-			}
-	});
+  fs.readdir(exports.paths.archivedSites, function(err, files) {
+      if (files.includes(url)) {  
+        callback(true);
+      } else {
+        callback(false);
+      }
+  });
 };
 
 
 exports.downloadUrls = function(urls) { //urls = array
   fs.readdir(exports.paths.archivedSites, function(err, files) {
-  	if (JSON.stringify(files) === JSON.stringify(urls)) {
-  		return true;
-  	} else {
-  		return false;
-  	}
+    if (JSON.stringify(files) === JSON.stringify(urls)) {
+      return true;
+    } else {
+      return false;
+    }
   });
 };

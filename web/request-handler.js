@@ -1,6 +1,5 @@
 var path = require('path');
 var archive = require('../helpers/archive-helpers');
-// var html = require('./index.html');
 var fs = require('fs');
 // require more modules/folders here!
 
@@ -14,29 +13,59 @@ exports.handleRequest = function (request, response) {
 
     if (request.url === '/') {
       fs.readFile('/Users/student/Desktop/hrsf76-web-historian/web/public/index.html', 'utf-8', function(err, html) {
-        
         if (err) {
           throw err;
-        } 
-        
+        }
         response.end(html);
       });
+    } 
+    fs.readFile(archive.paths.archivedSites + request.url, 'utf-8', function(err, data) {
+      if (err) {
+        response.writeHead(404);
+        response.end(); 
+      } else {
+        response.end(data);
+      }
+    });
+  }
+};
 
 
 
-    // } else {
+
+  //   if (request.url === '/') {
+  //     fs.readFile('/Users/student/Desktop/hrsf76-web-historian/web/public/index.html', 'utf-8', function(err, html) {
+  //       if (err) {
+  //         throw err;
+  //       }
+  //       response.end(html);
+  //     });
+  //   } else {
+  //     archive.isUrlArchived(request.url, function() {
+  //       fs.readFile(archive.paths.archivedSites + request.url, 'utf-8', function(err, data) {
+  //         if (err) {
+  //         throw err;
+  //       }
+  //       response.end(data);
+  //       });
+  //     });
+  //   } else {
+  //     // console.log('goodbye');
+  //     // statusCode = 404; 
+  //     response.writeHead(404);
+  //     response.end(); 
+  //   }
+  // } 
+
+    // else {
     //   statusCode = 404; 
     //   response.writeHead(statusCode);
     //   response.end(); 
-    }
+    // }
+    // } else if () //check sites.txt if url exists already.
+    //   if website exists in the archive
+    //   return the content of the website/readFile
 
-    //} else if () //check sites.txt if url exists already.
-      //if website exists in the archive
-      //return the content of the website/readFile
-
-
-  }
-};
 
 // res.end(archive.paths.list);
 
