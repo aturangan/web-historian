@@ -25,17 +25,60 @@ exports.initialize = function(pathsObj) {
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
+// var arrayOfUrls = [];
+// '/Users/student/Desktop/hrsf76-web-historian/archives/sites.txt'
 exports.readListOfUrls = function(callback) {
+	fs.readFile(exports.paths.list, 'utf8', function(err, data) {
+		if (err) {
+			console.log(err); 
+		}
+		callback(data.split('\n')); 
+	});
+  //read through archived sites 
+  //exports.paths.readFile?
+  // console.log('ARCHIVED', archivedSites); 
+  // done(); 
 };
 
 exports.isUrlInList = function(url, callback) {
+	//readList
+	exports.readListOfUrls(function(data) {
+		if (data.includes(url)) {
+			callback(true);
+		} else {
+			callback(false);
+		}
+	});
+		//isUrlInList 
+  // list: path.join(__dirname, '../archives/sites.txt')
 };
 
 exports.addUrlToList = function(url, callback) {
-};
+	fs.writeFile(exports.paths.list, url, function(err) {
+		if (err) {
+			console.log(err); 
+		}
+		callback();
+  });
+
+  fs.writeFile(exports.paths.archivedSites + '/' + url, '', function(err) { 
+    if (err) {
+    	console.log(err);
+    }
+  });
+}
 
 exports.isUrlArchived = function(url, callback) {
+	fs.readdir(exports.paths.archivedSites, function(err, files) {
+			if (files.includes(url)) {	
+				callback(true);
+			} else {
+				callback(false);
+			}
+	});
 };
 
+
 exports.downloadUrls = function(urls) {
+
 };

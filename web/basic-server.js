@@ -1,7 +1,15 @@
 var http = require('http');
 var handler = require('./request-handler');
 var initialize = require('./initialize.js');
+// var html = require('./index.html');
+var fs = require('fs');
 
+// fs.readFile('./index.html', function(err, html) {
+//   if (err) {
+//   	throw err;
+//   }
+//   server;
+// });
 // Why do you think we have this here?
 // HINT: It has to do with what's in .gitignore
 initialize('./archives');
