@@ -18,7 +18,6 @@ exports.handleRequest = function (request, response) {
   if (request.method === "GET") {
 
     if (request.url === '/') {
-      console.log('hi')
 
       fs.readFile('/Users/student/Desktop/hrsf76-web-historian/web/public/index.html', 'utf-8', function(err, html) {
         if (err) {
